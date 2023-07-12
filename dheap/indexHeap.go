@@ -39,16 +39,22 @@ func (h *IndexHeap[T]) Push(id int, item T) {
 }
 
 // shift down
-func (h *IndexHeap[T]) Pop() T {
+func (h *IndexHeap[T]) Pop() (T, int) {
 	ret := h.items[h.indexes[1]]
-
+	idx := h.indexes[1]
 	h.indexes[1], h.indexes[h.len] = h.indexes[h.len], h.indexes[1]
 	h.verIndexes[h.indexes[1]] = 1
 	h.verIndexes[h.indexes[h.len]] = h.len
 	h.len--
 	p := 1
 	h.shiftDown(p)
-	return ret
+	return ret, idx
+}
+func (h *IndexHeap[T]) GetIndex() int {
+	return h.indexes[1]
+}
+func (h *IndexHeap[T]) GetItemByIndex(idx int) T {
+	return h.items[idx]
 }
 func (h *IndexHeap[T]) Change(id int, modifiedItem T) {
 	id = id + 1
