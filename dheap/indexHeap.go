@@ -57,7 +57,7 @@ func (h *IndexHeap[T]) GetItemByIndex(idx int) T {
 	return h.items[idx+1]
 }
 func (h *IndexHeap[T]) IsContain(idx int) bool {
-	return h.items[idx+1] != nil
+	return h.verIndexes[idx+1] != 0
 }
 func (h *IndexHeap[T]) Change(id int, modifiedItem T) {
 	id = id + 1
